@@ -1,6 +1,5 @@
 // Select elements
 const gameCells = document.querySelectorAll(".gamecell");
-const resetButton = document.querySelector(".reset-btn");
 const resultDialog = document.querySelector(".result-dialog");
 const resultText = document.querySelector(".result-dialog h1");
 const playAgainButton = document.querySelector(".play-again");
@@ -58,21 +57,18 @@ function showResult(message) {
     resultDialog.showModal(); // Show result dialog
 }
 
-// Reset game
+// Reset game (Play Again)
 function resetGame() {
     board = ["", "", "", "", "", "", "", "", ""];
     gameCells.forEach(cell => cell.textContent = "");
     currentPlayer = "X";
     gameActive = true;
+    resultDialog.close(); // Close the result dialog when playing again
 }
 
 // Event Listeners
 gameCells.forEach(cell => cell.addEventListener("click", handleCellClick));
-resetButton.addEventListener("click", resetGame);
-playAgainButton.addEventListener("click", () => {
-    resultDialog.close();
-    resetGame();
-});
+playAgainButton.addEventListener("click", resetGame);
 backHomeButton.addEventListener("click", () => {
-    window.location.href = "http://localhost:3001/"; // Change to your homepage URL
+    window.location.href = "https://pushpamkumar.github.io/"; // Replace with your actual homepage URL
 });
