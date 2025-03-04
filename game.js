@@ -42,19 +42,58 @@ function gameInitialization(player1, player2) {
         return { addToArray, clearArray, checkWinner };
     })();
 
-    const displayController = (() => {
-        const playerTurnTitle = document.querySelector('main p');
-        const winnerDialog = document.querySelector('.result-dialog');
-        const winnerDialogMessage = winnerDialog.querySelector('h1');
+const displayController = (() => {
+    const playerTurnTitle = document.querySelector('main p');
+    const winnerDialog = document.querySelector('.result-dialog');
+    const winnerDialogMessage = winnerDialog.querySelector('h1');
 
-        winnerDialog.addEventListener('click', (event) => { if (event.target === winnerDialog) winnerDialog.close(); });
-        const updateCell = (cell, symbol) => cell.textContent = symbol;
-        const updateTitle = (message) => playerTurnTitle.textContent = message;
-        const showResult = (message) => { winnerDialogMessage.textContent = message; winnerDialog.showModal(); };
-        const clearBoard = () => gameCells.forEach(cell => cell.textContent = '');
-        
-        return { updateCell, updateTitle, showResult, clearBoard };
-    })();
+    // Create buttons dynamically
+    const playAgainButton = document.createElement('button');
+    playAgainButton.textContent = "Play Again";
+    
+    const homeButton = document.createElement('button');
+    homeButton.textContent = "Back to Home";
+
+    // Add event listeners
+    playAgainButton.addEventListener('click', () => {
+        game.cleanGame();
+        winnerDialog.close();
+    });
+
+    homeButton.addEventListener('click', () => {
+        window.location.href = "index.html"; // Change to your home page URL
+    });
+
+    winnerDialog.appendChild(playAgainButton);
+    winnerDialog.appendChild(homeButton);
+
+    // Close dialog when clicking outside
+    winnerDialog.addEventListener('click', (event) => {
+        if (event.target === winnerDialog) {
+            winnerDialog.close();
+        }
+    });
+
+    const addPlayerSymbol = (target, symbol) => {
+        target.textContent = symbol;
+    }
+
+    const changePlayerTurnTitle = (message) => {
+        playerTurnTitle.textContent = message;
+    }
+
+    const showResultDialog = (message) => {
+        winnerDialogMessage.textContent = message;
+        winnerDialog.showModal();
+    }
+
+    const cleanGameboard = () => {
+        gameCells.forEach(cell => { cell.textContent = '' });
+    }
+
+    return { addPlayerSymbol, changePlayerTurnTitle, showResultDialog, cleanGameboard };
+})();
+
 
     const game = (() => {
         let currentPlayer = player1;
