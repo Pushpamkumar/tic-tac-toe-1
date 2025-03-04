@@ -47,12 +47,31 @@ const displayController = (() => {
     const winnerDialog = document.querySelector('.result-dialog');
     const winnerDialogMessage = winnerDialog.querySelector('h1');
 
+    // Create a container for buttons
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = "flex";
+    buttonContainer.style.justifyContent = "center";
+    buttonContainer.style.gap = "10px";
+    buttonContainer.style.marginTop = "15px";
+
     // Create buttons dynamically
     const playAgainButton = document.createElement('button');
     playAgainButton.textContent = "Play Again";
-    
+    playAgainButton.style.padding = "10px 20px";
+    playAgainButton.style.cursor = "pointer";
+    playAgainButton.style.backgroundColor = "#28a745";
+    playAgainButton.style.color = "white";
+    playAgainButton.style.border = "none";
+    playAgainButton.style.borderRadius = "5px";
+
     const homeButton = document.createElement('button');
     homeButton.textContent = "Back to Home";
+    homeButton.style.padding = "10px 20px";
+    homeButton.style.cursor = "pointer";
+    homeButton.style.backgroundColor = "#007bff";
+    homeButton.style.color = "white";
+    homeButton.style.border = "none";
+    homeButton.style.borderRadius = "5px";
 
     // Add event listeners
     playAgainButton.addEventListener('click', () => {
@@ -64,8 +83,12 @@ const displayController = (() => {
         window.location.href = "index.html"; // Change to your home page URL
     });
 
-    winnerDialog.appendChild(playAgainButton);
-    winnerDialog.appendChild(homeButton);
+    // Append buttons inside the container
+    buttonContainer.appendChild(playAgainButton);
+    buttonContainer.appendChild(homeButton);
+
+    // Append container to the winner dialog
+    winnerDialog.appendChild(buttonContainer);
 
     // Close dialog when clicking outside
     winnerDialog.addEventListener('click', (event) => {
@@ -93,6 +116,9 @@ const displayController = (() => {
 
     return { addPlayerSymbol, changePlayerTurnTitle, showResultDialog, cleanGameboard };
 })();
+
+
+
 
 
     const game = (() => {
