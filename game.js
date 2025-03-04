@@ -70,5 +70,5 @@ function resetGame() {
 gameCells.forEach(cell => cell.addEventListener("click", handleCellClick));
 playAgainButton.addEventListener("click", resetGame);
 backHomeButton.addEventListener("click", () => {
-    window.location.href = "https://pushpamkumar.github.io/"; // Replace with your actual homepage URL
+    window.location.href = "http://localhost:3001/"; // Replace with your actual homepage URL
 });
